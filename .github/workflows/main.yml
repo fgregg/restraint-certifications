@@ -22,7 +22,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run make
-        run: make
+        run: make -B
 
       - name: Check for changes
         id: check_changes
