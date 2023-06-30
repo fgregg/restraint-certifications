@@ -16,7 +16,7 @@ for commit in repo.iter_commits(paths=certifications_file):
     with open(certifications_file) as f:
         reader = csv.DictReader(f)
         for row in reader:
-            employee_hash = hashlib.sha256(row.pop('employeeFullName').encode()).hexdigest()
+            employee_hash = hashlib.sha256((row.pop('employeeFullName') + row['school_id']).encode()).hexdigest()
             row['employeeHash'] = employee_hash
             row['observedDate'] = commit.authored_datetime.date()
 
