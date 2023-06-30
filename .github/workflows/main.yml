@@ -22,9 +22,15 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run make
+      - name: make certifications.csv
+        run: make -B certifications.csv
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          message: 'update certs'
+      - name: make certifications_history.csv
         run: make -B
       - name: Commit changes
         uses: EndBug/add-and-commit@v7
         with:
-          message: 'update'
+          message: 'update history'
