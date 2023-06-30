@@ -20,4 +20,4 @@ for commit in repo.iter_commits(paths=certifications_file):
 
             writer.writerow(row)
 
-repo.git.checkout("main", force=True)
+repo.git.checkout("main")
