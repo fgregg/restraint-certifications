@@ -8,6 +8,8 @@ certifications_file = sys.argv[1]
 writer = csv.DictWriter(sys.stdout, fieldnames=['school', 'school_id', 'certExpirationDate', 'position', 'trainerOneFullName', 'trainerTwoFullName', 'employeeHash', 'observedDate'])
 writer.writeheader()
 
+rows = []
+
 repo = Repo(".")
 for commit in repo.iter_commits(paths=certifications_file):
     repo.git.checkout(commit, force=True)
@@ -18,6 +20,8 @@ for commit in repo.iter_commits(paths=certifications_file):
             row['employeeHash'] = employee_hash
             row['observedDate'] = commit.authored_datetime.date()
 
-            writer.writerow(row)
+            rows.append(row)
 
 repo.git.checkout("main")
+
+writer.writerows(rows)
